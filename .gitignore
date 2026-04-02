@@ -14,5 +14,10 @@
 /notebook/ema-es-64/logs
 /notebook/ema-es-64-(2)/logs
 /notebook/ema-es-64-(3)/logs
+/notebook/ema-es-64-(4)/logs
+/notebook/ema-es-64-v5/logs
+/notebook/ema-es-64-v6/logs
+/notebook/ema-es-64-v6
+/notebook/ema-es-128-v7/logs
 *.safetensors
 .env
