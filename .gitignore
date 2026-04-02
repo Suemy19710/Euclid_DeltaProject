@@ -9,3 +9,10 @@
 /einstein_rings/einstein_rings_augmented
 /einstein_rings/output
 /temp-dir
+/notebook/ddpm-es-128/logs
+/notebook/einstein_rings/logs
+/notebook/ema-es-64/logs
+/notebook/ema-es-64-(2)/logs
+/notebook/ema-es-64-(3)/logs
+*.safetensors
+.env
