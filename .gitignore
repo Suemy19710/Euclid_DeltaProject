@@ -10,6 +10,7 @@
 /einstein_rings/output
 /einstein_rings/augmented_dataset
 /einstein_rings/generated_rings_final
+/einstein_rings/generated_rings_vae
 /temp-dir
 /notebook/ddpm-es-128/logs
 /notebook/einstein_rings/logs
