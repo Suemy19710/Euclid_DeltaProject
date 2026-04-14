@@ -23,5 +23,6 @@
 /notebook/ema-es-64-v6/logs
 /notebook/ema-es-64-v6
 /notebook/ema-es-128-v7/logs
+/notebook/synthetic_rings
 *.safetensors
 .env
