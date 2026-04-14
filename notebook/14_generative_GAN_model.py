@@ -10,7 +10,7 @@ CHANNELS = 1
 Z_DIM = 100             
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 MODEL_PATH = "gan_output/best_einstein_gen.pth" 
-OUTPUT_FOLDER = "../einstein_rings/generated_rings_final"
+OUTPUT_FOLDER = "../einstein_rings/generated_rings_gan"
 
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
@@ -58,7 +58,7 @@ else:
 print(f"Generating 1000 images in {OUTPUT_FOLDER}...")
 
 with torch.no_grad():
-    for i in range(1000):
+    for i in range(2000):
         # Create random noise
         noise = torch.randn(1, Z_DIM, 1, 1).to(DEVICE)
         
@@ -66,6 +66,6 @@ with torch.no_grad():
         fake = gen(noise)
         
         # Save (normalize=True converts -1/1 range back to 0/1 for viewing)
-        utils.save_image(fake, f"{OUTPUT_FOLDER}/ring_fake_{i}.png", normalize=True)
+        utils.save_image(fake, f"{OUTPUT_FOLDER}/gan_{i}.png", normalize=True)
 
 print(f"Done! Created 1000 images.")

@@ -148,7 +148,7 @@ for i in range(TOTAL_TO_GENERATE):
         noise = torch.randn_like(generated_img) * 0.03 
         generated_img = torch.clamp(generated_img + noise, 0, 1)
 
-        utils.save_image(generated_img, f"{FINAL_OUTPUT_DIR}/ring_synth_{i:04d}.png")
+        utils.save_image(generated_img, f"{FINAL_OUTPUT_DIR}/vae_{i:04d}.png")
 
     if i % 500 == 0:
         print(f"Progress: {i}/{TOTAL_TO_GENERATE}")
