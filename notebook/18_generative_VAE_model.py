@@ -13,7 +13,7 @@ import random
 MODEL_PATH = "vae_output/best_vae_model.pth"
 INPUT_DIR = "../einstein_rings/einstein_rings_all"
 FINAL_OUTPUT_DIR = "../einstein_rings/generated_rings_vae"
-LATENT_DIM = 128       # Size of the "knowledge" bottleneck
+LATENT_DIM = 128       
 IMAGE_SIZE = 100
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 LR = 1e-3
@@ -27,7 +27,7 @@ os.makedirs(FINAL_OUTPUT_DIR, exist_ok=True)
 # ==========================================
 # 2. DYNAMIC DATA LOADER
 # ==========================================
-# We use one transform for training (flips/rots) and one for validation
+#  use one transform for training (flips/rots) and one for validation
 train_transform = transforms.Compose([
     transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
     transforms.RandomHorizontalFlip(),
@@ -43,7 +43,6 @@ class EinsteinDataset(torch.utils.data.Dataset):
         self.image_files = [f for f in os.listdir(root_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
     def __len__(self):
-        # We tell PyTorch the dataset is "long" so it applies many random augmentations
         return 2000 
 
     def __getitem__(self, idx):

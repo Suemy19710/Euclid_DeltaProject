@@ -10,8 +10,8 @@ from PIL import Image
 # ==========================================
 # 1. CONFIGURATION & HYPERPARAMETERS
 # ==========================================
-DATA_PATH = "../einstein_rings/augmented_dataset" # Folder containing your 1000 images
-OUTPUT_DIR = "gan_output"                         # Everything will be saved here
+DATA_PATH = "../einstein_rings/augmented_dataset"
+OUTPUT_DIR = "gan_output"                         
 IMAGE_SIZE = 64         
 CHANNELS = 1            
 Z_DIM = 100             
@@ -19,13 +19,12 @@ BATCH_SIZE = 64
 LR = 1e-4               
 LAMBDA_GP = 10          
 CRITIC_ITERATIONS = 5   
-EPOCHS = 500            # Increased max epochs since early stopping is active
+EPOCHS = 500           
 PATIENCE = 20           # Early stopping patience
 
-# Ensure output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Hardware Check
+# gpu Check
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {DEVICE}")
 if torch.cuda.is_available():
@@ -36,7 +35,6 @@ else:
 # ==========================================
 # 2. MODEL ARCHITECTURES
 # ==========================================
-
 class Generator(nn.Module):
     def __init__(self, z_dim, channels, features_g):
         super(Generator, self).__init__()
@@ -207,6 +205,5 @@ for epoch in range(EPOCHS):
             fake_samples = gen(sample_noise)
             utils.save_image(fake_samples, os.path.join(OUTPUT_DIR, f"epoch_{epoch}.png"), normalize=True)
 
-# Final Save
 torch.save(gen.state_dict(), os.path.join(OUTPUT_DIR, "final_einstein_gen.pth"))
 print(f"Training Complete. Files saved to folder: {OUTPUT_DIR}")

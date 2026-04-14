@@ -9,13 +9,13 @@ import os
 CHANNELS = 1            
 Z_DIM = 100             
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-MODEL_PATH = "gan_output/best_einstein_gen.pth" # Path to your trained file
+MODEL_PATH = "gan_output/best_einstein_gen.pth" 
 OUTPUT_FOLDER = "../einstein_rings/generated_rings_final"
 
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 # ==========================================
-# 2. MODEL ARCHITECTURE (Must be identical to training)
+# 2. MODEL ARCHITECTURE 
 # ==========================================
 class Generator(nn.Module):
     def __init__(self, z_dim, channels, features_g):
@@ -44,7 +44,6 @@ class Generator(nn.Module):
 # ==========================================
 
 # Initialize the model structure
-# (We use 'Generator' NOT 'torch.Generator')
 gen = Generator(Z_DIM, CHANNELS, 64).to(DEVICE)
 
 # Load the saved weights

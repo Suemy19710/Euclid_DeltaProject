@@ -12,7 +12,6 @@ INPUT_FOLDER = "../einstein_rings/einstein_rings_all"
 OUTPUT_FOLDER = "../einstein_rings/augmented_dataset"
 TOTAL_IMAGES_NEEDED = 1000
 
-# Create output directory if it doesn't exist
 if not os.path.exists(OUTPUT_FOLDER):
     os.makedirs(OUTPUT_FOLDER)
 
@@ -33,7 +32,7 @@ print(f"Found {len(original_images)} base images. Generating {TOTAL_IMAGES_NEEDE
 # ==========================================
 # 2. DEFINING THE AUGMENTATION PIPELINE
 # ==========================================
-# We use RandomAffine because it handles Rotation and Zoom at the same time
+# I use RandomAffine because it handles Rotation and Zoom at the same time
 # This is much cleaner and prevents the 'diamond' edge look.
 augmentation_pipeline = transforms.Compose([
     transforms.Grayscale(num_output_channels=1),

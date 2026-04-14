@@ -91,4 +91,4 @@ for i in range(5000):
     if i % 500 == 0:
         print(f"Progress: {i}/5000 images created.")
 
-print("Done! You now have a scientifically accurate dataset of 5000 images.")
+print("Done! have a scientifically accurate dataset of 5000 images.")

@@ -11,11 +11,11 @@ from tqdm import tqdm
 # ==========================================
 # 1. CONFIGURATION
 # ==========================================
-DATA_PATH = "../einstein_rings/augmented_dataset" # Folder containing your 1000 images
-OUTPUT_DIR = "diffusion_output"                         # Everything will be saved here
-IMAGE_SIZE = 100      # Updated to your specific size
+DATA_PATH = "../einstein_rings/augmented_dataset" 
+OUTPUT_DIR = "diffusion_output"                         
+IMAGE_SIZE = 100     
 CHANNELS = 1
-BATCH_SIZE = 16       # Smaller batch for 100x100 to save VRAM
+BATCH_SIZE = 16       
 LR = 2e-4
 EPOCHS = 500
 TIMESTEPS = 300       # Diffusion steps
