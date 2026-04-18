@@ -9,7 +9,7 @@ import os
 CHANNELS = 1            
 Z_DIM = 100             
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-MODEL_PATH = "gan_output/best_einstein_gen.pth" 
+MODEL_PATH = "gan_output/final_einstein_gen.pth" 
 OUTPUT_FOLDER = "../einstein_rings/generated_rings_gan"
 
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)

@@ -6,7 +6,8 @@ from torchvision import transforms, utils
 import os
 import numpy as np
 from PIL import Image
-
+import matplotlib.pyplot as plt 
+ 
 # ==========================================
 # 1. CONFIGURATION & HYPERPARAMETERS
 # ==========================================
@@ -144,6 +145,10 @@ best_w_dist = float('inf')
 stop_counter = 0
 min_delta = 0.001
 
+gen_losses = []
+critic_losses = []
+w_distances = []
+
 # ==========================================
 # 5. TRAINING LOOP
 # ==========================================
@@ -155,6 +160,8 @@ print(f"Starting Training: {len(dataset)} images found.")
 
 for epoch in range(EPOCHS):
     epoch_w_distances = []
+    epoch_gen_loss = []
+    epoch_critic_loss = []
 
     for batch_idx, (real, _) in enumerate(loader):
         real = real.to(DEVICE)
@@ -183,20 +190,24 @@ for epoch in range(EPOCHS):
         gen.zero_grad()
         loss_gen.backward()
         opt_gen.step()
+        epoch_gen_loss.append(loss_gen.item())
 
     # --- Epoch Summary & Early Stopping ---
+    gen_losses.append(np.mean(epoch_gen_loss))
+    critic_losses.append(np.mean(epoch_critic_loss))
     avg_w_dist = abs(np.mean(epoch_w_distances))
+    w_distances.append(avg_w_dist)
     print(f"Epoch [{epoch}/{EPOCHS}] W-Dist: {avg_w_dist:.4f} | Loss G: {loss_gen:.4f}")
 
-    if avg_w_dist < (best_w_dist - min_delta):
-        best_w_dist = avg_w_dist
-        stop_counter = 0
-        torch.save(gen.state_dict(), os.path.join(OUTPUT_DIR, "best_einstein_gen.pth"))
-    else:
-        stop_counter += 1
-        if stop_counter >= PATIENCE:
-            print("Early stopping triggered.")
-            break
+    # if avg_w_dist < (best_w_dist - min_delta):
+    #     best_w_dist = avg_w_dist
+    #     stop_counter = 0
+    #     torch.save(gen.state_dict(), os.path.join(OUTPUT_DIR, "best_einstein_gen.pth"))
+    # else:
+    #     stop_counter += 1
+    #     if stop_counter >= PATIENCE:
+    #         print("Early stopping triggered.")
+    #         break
 
     # Save visual samples
     if epoch % 10 == 0:
@@ -207,3 +218,27 @@ for epoch in range(EPOCHS):
 
 torch.save(gen.state_dict(), os.path.join(OUTPUT_DIR, "final_einstein_gen.pth"))
 print(f"Training Complete. Files saved to folder: {OUTPUT_DIR}")
+
+# ==========================================
+# 6. PLOTTING RESULTS
+# ==========================================
+plt.figure(figsize=(10, 5))
+plt.title("Generator and Critic Loss During Training")
+plt.plot(gen_losses, label="Generator Loss")
+plt.plot(critic_losses, label="Critic Loss")
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.legend()
+plt.grid(True)
+plt.savefig(os.path.join(OUTPUT_DIR, "loss_plot.png"))
+
+plt.figure(figsize=(10, 5))
+plt.title("Wasserstein Distance (Convergence Metric)")
+plt.plot(w_distances, label="W-Distance", color="green")
+plt.xlabel("Epochs")
+plt.ylabel("Distance")
+plt.legend()
+plt.grid(True)
+plt.savefig(os.path.join(OUTPUT_DIR, "w_distance_plot.png"))
+
+print(f"Training Complete. Plots saved to: {OUTPUT_DIR}")

@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader, random_split
 from torchvision import transforms, utils
 from PIL import Image
 import numpy as np
+import matplotlib.pyplot as plt 
 
 # ==========================================
 # 1. CONFIGURATION
@@ -16,7 +17,7 @@ IMAGE_SIZE = 100
 LATENT_DIM = 128      
 BATCH_SIZE = 32
 LR = 1e-3
-EPOCHS = 300
+EPOCHS = 1000
 PATIENCE = 20          # Early stopping
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -115,6 +116,9 @@ train_ds, val_ds = random_split(full_dataset, [train_size, val_size])
 train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False)
 
+train_loss_history = []
+val_loss_history = []
+
 # ==========================================
 # 5. TRAINING LOOP
 # ==========================================
@@ -148,6 +152,8 @@ for epoch in range(EPOCHS):
 
     avg_train = train_loss / len(train_ds)
     avg_val = val_loss / len(val_ds)
+    train_loss_history.append(avg_train)
+    val_loss_history.append(avg_val)
     print(f"Epoch {epoch} | Train Loss: {avg_train:.4f} | Val Loss: {avg_val:.4f}")
 
     # # Early Stopping
@@ -170,3 +176,17 @@ for epoch in range(EPOCHS):
             utils.save_image(comparison, os.path.join(OUTPUT_DIR, f"epoch_{epoch}.png"), nrow=8)
 
 print(f"Training finished. Best model saved in {OUTPUT_DIR}")
+
+plt.figure(figsize=(10, 5))
+plt.plot(train_loss_history, label='Train Loss')
+plt.plot(val_loss_history, label='Val Loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.title('VAE Training and Validation Loss')
+plt.legend()
+plt.grid(True)
+
+# Save the plot to the output directory
+loss_plot_path = os.path.join(OUTPUT_DIR, "loss_curve.png")
+plt.savefig(loss_plot_path)
+print(f"Training finished. Loss curve saved to {loss_plot_path}")
