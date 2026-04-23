@@ -11,8 +11,9 @@ import matplotlib.pyplot as plt
 # ==========================================
 # 1. CONFIGURATION & HYPERPARAMETERS
 # ==========================================
-DATA_PATH = "../einstein_rings/augmented_dataset"
-OUTPUT_DIR = "gan_output"                         
+# DATA_PATH = "../einstein_rings/augmented_dataset"
+DATA_PATH = "../einstein_rings/no_lens"
+OUTPUT_DIR = "gan_output_no_lens"                         
 IMAGE_SIZE = 64         
 CHANNELS = 1            
 Z_DIM = 100             
