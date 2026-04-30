@@ -13,7 +13,9 @@
 /einstein_rings/generated_rings_vae
 /einstein_rings/generated_rings_gan
 /einstein_rings/generated_no_rings_gan
+/einstein_rings/generated_no_rings_vae
 /einstein_rings/hybrid_dataset
+/einstein_rings/hybrid_dataset_no_lens
 /temp-dir
 /notebook/ddpm-es-128/logs
 /notebook/einstein_rings/logs

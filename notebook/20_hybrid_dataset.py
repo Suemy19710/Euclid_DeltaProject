@@ -3,10 +3,10 @@ import shutil
 import random
 
 # Configuration
-REAL_DIR = "../einstein_rings/einstein_rings_all"
-GAN_DIR = "../einstein_rings/generated_rings_gan"  
-VAE_DIR =  "../einstein_rings/generated_rings_vae"
-FINAL_DIR =  "../einstein_rings/hybrid_dataset"
+REAL_DIR = "../einstein_rings/no_lens"
+GAN_DIR = "../einstein_rings/generated_no_rings_gan"  
+VAE_DIR =  "../einstein_rings/generated_no_rings_vae"
+FINAL_DIR =  "../einstein_rings/hybrid_dataset_no_lens"
 
 # Ratios suggested by feedback
 NUM_GAN = 1400

@@ -10,9 +10,9 @@ import random
 
 
 # 1. Setup
-MODEL_PATH = "vae_output/best_vae_model.pth"
-INPUT_DIR = "../einstein_rings/einstein_rings_all"
-FINAL_OUTPUT_DIR = "../einstein_rings/generated_rings_vae"
+MODEL_PATH = "vae_output_no_lens/final_einstein_vae.pth"
+INPUT_DIR = "../einstein_rings/no_lens"
+FINAL_OUTPUT_DIR = "../einstein_rings/generated_no_rings_vae"
 LATENT_DIM = 128       
 IMAGE_SIZE = 100
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"

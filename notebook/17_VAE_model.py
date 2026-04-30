@@ -11,13 +11,13 @@ import matplotlib.pyplot as plt
 # ==========================================
 # 1. CONFIGURATION
 # ==========================================
-INPUT_DIR = "../einstein_rings/einstein_rings_all"
-OUTPUT_DIR = "vae_output"
+INPUT_DIR = "../einstein_rings/no_lens"
+OUTPUT_DIR = "vae_output_no_lens"
 IMAGE_SIZE = 100
 LATENT_DIM = 128      
 BATCH_SIZE = 32
 LR = 1e-3
-EPOCHS = 1000
+EPOCHS = 200
 PATIENCE = 20          # Early stopping
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -174,7 +174,7 @@ for epoch in range(EPOCHS):
             recon_img, _, _ = model(sample_img)
             comparison = torch.cat([sample_img, recon_img])
             utils.save_image(comparison, os.path.join(OUTPUT_DIR, f"epoch_{epoch}.png"), nrow=8)
-
+torch.save(model.state_dict(), os.path.join(OUTPUT_DIR, "final_einstein_vae.pth"))
 print(f"Training finished. Best model saved in {OUTPUT_DIR}")
 
 plt.figure(figsize=(10, 5))
